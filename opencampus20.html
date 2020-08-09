@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="貞廣泰造（津田塾大学)" />
+  <meta name="dcterms.date" content="2020-08-16" />
+  <title>ライツアウトパズルと 連立方程式</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="opencampus20_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="opencampus20_files/reveal.js-3.3.0.1/css/theme/beige.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="opencampus20_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="opencampus20_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">ライツアウトパズルと<br/>連立方程式</h1>
+    <h2 class="author">貞廣泰造（津田塾大学)</h2>
+    <h3 class="date">2020-08-16</h3>
+</section>
+
+<section class="slide level2">
+
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+  }
+  .reveal ul {
+    display: block;
+    list-style-type: none;
+  }
+  .reveal ol {
+    display: block;
+  }
+  .reveal section img { background:none; border:none; box-shadow:none; }
+</style>
+<style type="text/css">
+.reveal blockquote { width: 100% }
+.reveal p { text-align: left; line-height: 1.6;}
+.reveal ul { text-align: left; line-height: 1.6;}
+.reveal .org-ul {line-height: 1.4;}
+</style>
+</section>
+<section><section class="titleslide slide level1"><h1>ライツアウトパズル</h1></section><section class="slide level2">
+<h2>ルール</h2>
+<ul>
+<li class="fragment">タイルがライトになっている。</li>
+<li class="fragment">クリックされたタイルとその隣接タイルのon-offが反転</li>
+<li class="fragment">全部offにしたら完成</li>
+</ul>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<div alighn="center">
+<div id="lightsout">
+
+</div>
+</div>
+<script src="lightsout.js"></script>
+<p>https://opencampussadahiro20.web.app/</p>
+</section><section class="slide level2">
+<h2>一般化</h2>
+<p>どのようなタイル張り(グラフ)の上にも定義できる。</p>
+<p><a href="https://pro4-12b05.firebaseapp.com/"> https://pro4-12b05.firebaseapp.com/ </a></p>
+</section></section>
+<section><section class="titleslide slide level1"><h1>解法と連立方程式</h1></section><section class="slide level2">
+<h2>有限体<span class="math inline">\({\mathbb F}_2=\{\bar{0},\bar{1}\}\)</span></h2>
+<ul>
+<li class="fragment">足し算　（通常の足し算を<span class="math inline">\(2\)</span>で割ったあまり）
+<table border="1">
+<tr>
+<td>
+<span class="math inline">\(+\)</span>
+</td>
+<td>
+<span class="math inline">\(\bar{0}\)</span>
+</td>
+<td>
+<span class="math inline">\(\bar{1}\)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\bar{0}\)</span>
+</td>
+<td>
+<span class="math inline">\(\bar{0}\)</span>
+</td>
+<td>
+<span class="math inline">\(\bar{1}\)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\bar{1}\)</span>
+</td>
+<td>
+<span class="math inline">\(\bar{1}\)</span>
+</td>
+<td>
+<span class="math inline">\({\color{red}{\bar{0}}}\)</span>
+</td>
+</tr>
+</table>
+<br/> <span class="math display">\[
+\bar{0} + \bar{1} = \bar{1},~~~ \bar{1} + \bar{1} = \bar{0}
+\]</span></li>
+</ul>
+<p><br/></p>
+<ul>
+<li class="fragment">かけ算
+<table border="1">
+<tr>
+<td>
+<span class="math inline">\(\times\)</span>
+</td>
+<td>
+<span class="math inline">\(\bar{0}\)</span>
+</td>
+<td>
+<span class="math inline">\(\bar{1}\)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\bar{0}\)</span>
+</td>
+<td>
+<span class="math inline">\(\bar{0}\)</span>
+</td>
+<td>
+<span class="math inline">\(\bar{0}\)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\bar{1}\)</span>
+</td>
+<td>
+<span class="math inline">\(\bar{0}\)</span>
+</td>
+<td>
+<span class="math inline">\(\bar{1}\)</span>
+</td>
+</tr>
+</table></li>
+</ul>
+</section><section class="slide level2">
+<h2>基本的な性質</h2>
+<ul>
+<li class="fragment"><span class="math inline">\(a + b = b + a,~~~\)</span> <span class="math inline">\(a\times b = b\times a~~\)</span>　 (交換法則)</li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(a + (b + c) = (a + b ) + c~~\)</span>　 (結合法則)</li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(a \times (b \times c) = (a \times b ) \times c\)</span></li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(a\times(b + c) = a\times b + a\times c~~\)</span>　 (分配法則)</li>
+</ul>
+</section><section class="slide level2">
+<h2>ベクトル</h2>
+<p><span class="math inline">\(n\)</span>次元ベクトル <span class="math display">\[
+\overrightarrow{a}=\begin{pmatrix}a_1\\a_2\\\vdots\\a_n\end{pmatrix}
+\]</span> <span class="math inline">\(\{\bar{0},\bar{1}\}\)</span>の元を<span class="math inline">\(n\)</span>個並べたもの</p>
+</section><section class="slide level2">
+<h2>ベクトルの足し算</h2>
+<p><span class="math display">\[
+\overrightarrow{a}=\begin{pmatrix}a_1\\a_2\\\vdots\\a_n\end{pmatrix},
+~~
+\overrightarrow{b}=\begin{pmatrix}b_1\\b_2\\\vdots\\b_n\end{pmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\overrightarrow{a} + \overrightarrow{b}
+=
+\begin{pmatrix}a_1\\a_2\\\vdots\\a_n\end{pmatrix}+\begin{pmatrix}b_1\\b_2\\\vdots\\b_n\end{pmatrix}
+=\begin{pmatrix}a_1 + b_1\\a_2 + b_2\\\vdots\\a_n + b_n\end{pmatrix}
+\]</span></p>
+</section><section class="slide level2">
+<h2>ベクトルのスカラー倍</h2>
+<p><span class="math display">\[
+c \in \{\bar{0},\bar{1}\},~~ \overrightarrow{a}=\begin{pmatrix}a_1\\a_2\\\vdots\\a_n\end{pmatrix},
+\]</span> <span class="math display">\[
+c\overrightarrow{a} = c\begin{pmatrix}a_1\\a_2\\\vdots\\a_n\end{pmatrix}
+=\begin{pmatrix}ca_1\\ca_2\\\vdots\\ca_n\end{pmatrix}
+\]</span></p>
+</section><section class="slide level2">
+<h2>1次方程式</h2>
+<ul>
+<li class="fragment"><span class="math inline">\(x + \bar{1} = \bar{1}\)</span></li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(~~~~~~~~~~~\Longrightarrow (x + \bar{1}) + \bar{1} = \bar{1} + \bar{1}\)</span> (両辺に<span class="math inline">\(\bar{1}\)</span>を加えた)</li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(~~~~~~~~~~~\Longrightarrow x + (\bar{1} + \bar{1}) = \bar{0}\)</span> (結合法則)</li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(~~~~~~~~~~~\Longrightarrow x + \bar{0} = \bar{0}\)</span></li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(~~~~~~~~~~~\Longrightarrow x = \bar{0}\)</span></li>
+</ul>
+<ul>
+<li class="fragment">問: 方程式　<span class="math inline">\(x + \bar{1} = \bar{0}\)</span>　を解け</li>
+</ul>
+</section><section class="slide level2">
+<h2>2元連立方程式</h2>
+<ul>
+<li class="fragment"><span class="math inline">\(\left\{ \begin{array}{cccc} x &amp; + &amp; y &amp; = &amp; \bar{1}\\ &amp; &amp; y &amp; = &amp; \bar{1} \end{array} \right.\)</span></li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(~~~~~~~~~~~\Longrightarrow x = \bar{0},~~ y = \bar{1}\)</span><br/><br/></li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(x\begin{pmatrix}\bar{1}\\\bar{0}\end{pmatrix}+y\begin{pmatrix}\bar{1}\\\bar{1}\end{pmatrix}=\begin{pmatrix}\bar{1}\\\bar{1}\end{pmatrix}~~~~\)</span> ベクトルによる表現</li>
+</ul>
+</section><section class="slide level2">
+<h2><span class="math inline">\({\mathbb F}_2\)</span>によるon-offの表現</h2>
+<p><span class="math inline">\(\bar{1}:\)</span> ライトがオン <svg width="40" height="40"><rect x="0" y="0" width="40" height="40" fill="yellow" fill-opacity="0.5" stroke="black"/></svg></p>
+<p><span class="math inline">\(\bar{0}:\)</span> ライトがオフ <svg width="40" height="40"><rect x="0" y="0" width="40" height="40" fill="gray" fill-opacity="0.5" stroke="black"/></svg></p>
+<p><br/> <span class="math display">\[
+\bar{0} + \bar{1} = \bar{1},~~~ \bar{1} + \bar{1} = \bar{0}
+\]</span></p>
+<p><span class="math inline">\(\bar{1}\)</span>を足すことはon-off反転</p>
+</section><section class="slide level2">
+<h2>例</h2>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<div id="lightsout2x2">
+
+</div>
+<script src="lightsout2x2.js"></script>
+</section><section class="slide level2 left">
+<h2>連立方程式</h2>
+<ul>
+<li class="fragment"><span class="math inline">\({\mathbf S}:\)</span> on-offの初期状態を表すベクトル</li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\({\mathbf v}_i:\)</span> タイル<span class="math inline">\(i\)</span>を押すことによる変化を表すベクトル</li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(x_i:\)</span> タイル<span class="math inline">\(i\)</span>を押すか押さないか <span class="math display">\[
+x_i = 
+\begin{cases}
+\bar{1} &amp; 押す\\
+\bar{0} &amp; 押さない
+\end{cases}
+\]</span></li>
+</ul>
+<ul>
+<li class="fragment">連立方程式: <span class="math display">\[{\mathbf S} + x_1{\mathbf v}_1 + x_2{\mathbf v}_2 + \cdots + x_n{\mathbf v}_n=\bar{0}\]</span> <br/> <span class="math display">\[{x_1{\mathbf v}_1 + x_2{\mathbf v}_2 + \cdots + x_n{\mathbf v}_n=-{\mathbf S}}\]</span></li>
+</ul>
+</section><section class="slide level2">
+<h2>例(2x2)</h2>
+<svg width="100" height="100">
+<rect x="0" y="0" width="50" height="50"  fill="yellow" fill-opacity="0.5" stroke="black" /> <rect x="50" y="0" width="50" height="50" fill="yellow" fill-opacity="0.5" stroke="black" /> <rect x="0" y="50" width="50" height="50" fill="yellow" fill-opacity="0.5" stroke="black" /> <rect x="50" y="50" width="50" height="50"fill="yellow" fill-opacity="0.5" stroke="black" /> <text fill="blue" stroke="blue" x="15" y= "35">1</text> <text fill="blue" stroke="blue" x="15" y= "85">2</text> <text fill="blue" stroke="blue" x="65" y= "35">3</text> <text fill="blue" stroke="blue" x="65" y= "85">4</text>
+</svg>
+<ul>
+<li class="fragment"><span class="math inline">\(\begin{array}{c}\color{blue}{\mathtt 1}\\\color{blue}{\mathtt 2}\\\color{blue}{\mathtt 3}\\\color{blue}{\mathtt 4}\end{array}~~x\begin{pmatrix}1\\\bar{1}\\\bar{1}\\0\end{pmatrix}+y\begin{pmatrix}\bar{1}\\\bar{1}\\\bar{0}\\\bar{1}\end{pmatrix}+z\begin{pmatrix}\bar{1}\\\bar{0}\\\bar{1}\\\bar{1}\end{pmatrix}+w\begin{pmatrix}\bar{0}\\\bar{1}\\\bar{1}\\\bar{1}\end{pmatrix}=\begin{pmatrix}\bar{1}\\\bar{1}\\\bar{1}\\\bar{1}\end{pmatrix}\)</span> <br/> <br/></li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(\left\{\begin{array}{ccccccccc}x &amp; + &amp; y &amp; + &amp; z &amp; &amp; &amp; = &amp; \bar{1}\\ x &amp; + &amp; y &amp; &amp; &amp; + &amp; w &amp; = &amp; \bar{1}\\ x &amp; &amp; &amp; + &amp; z &amp; + &amp; w &amp; = &amp; \bar{1}\\ &amp; &amp; y &amp; + &amp; z &amp; + &amp; w &amp; = &amp; \bar{1}\\\end{array}\right.\)</span></li>
+</ul>
+</section><section class="slide level2">
+<h2>問(2x2)</h2>
+<svg width="100" height="100">
+<rect x="0" y="0" width="50" height="50"  fill="yellow" fill-opacity="0.5" stroke="black" /> <rect x="50" y="0" width="50" height="50" fill="gray" fill-opacity="0.5" stroke="black" /> <rect x="0" y="50" width="50" height="50" fill="gray" fill-opacity="0.5" stroke="black" /> <rect x="50" y="50" width="50" height="50"fill="gray" fill-opacity="0.5" stroke="black" /> <text fill="blue" stroke="blue" x="15" y= "35">1</text> <text fill="blue" stroke="blue" x="15" y= "85">2</text> <text fill="blue" stroke="blue" x="65" y= "35">3</text> <text fill="blue" stroke="blue" x="65" y= "85">4</text>
+</svg>
+</section><section class="slide level2">
+<h2>いつでも解けるわけではない</h2>
+<svg width="100" height="100">
+<rect x="0" y="0" width="50" height="50"  fill="yellow" fill-opacity="0.5" stroke="black" /> <rect x="50" y="0" width="50" height="50" fill="gray" fill-opacity="0.5" stroke="black" /> <text fill="blue" stroke="blue" x="15" y= "35">1</text> <text fill="blue" stroke="blue" x="65" y= "35">2</text>
+</svg>
+<ul>
+<li class="fragment"><span class="math inline">\(\left\{\begin{array}{ccccc}x &amp; + &amp; y &amp; = &amp; \bar{1}\\ x &amp; + &amp; y &amp; = &amp; \bar{0}\end{array}\right.\)</span></li>
+</ul>
+</section><section class="slide level2">
+<h2>解けない例</h2>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<div id="lightsout4">
+
+</div>
+<script src="unsolvablelightsout4.js"></script>
+</section><section class="slide level2">
+<h2>ラプラシアンとその階数</h2>
+<p>タイル(ライト)が<span class="math inline">\(n\)</span>枚</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\bullet\)</span> ベクトル<span class="math inline">\(\overrightarrow{v}_i\)</span>を並べたもの <span class="math display">\[
+L = (\overrightarrow{v}_1, \overrightarrow{v}_2, \ldots, \overrightarrow{v}_n)
+\]</span> を<strong>ラプラシアン</strong>と呼ぶ。</li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(\bullet\)</span> 解ける初期配置の個数はある整数<span class="math inline">\(r\)</span>によって<span class="math inline">\(2^r\)</span>個と表される。</li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(\bullet\)</span> <span class="math inline">\(r\)</span>を<span class="math inline">\(L\)</span>の<strong>階数</strong>と呼ぶ。<span class="math inline">\(n-r\)</span>を<strong>余階数</strong>と呼ぶことにする。</li>
+</ul>
+<ul>
+<li class="fragment"><span class="math inline">\(\bullet\)</span> 可解なとき、解の個数は<span class="math inline">\(2^{n-r}\)</span>個ある。</li>
+</ul>
+</section><section class="slide level2">
+<h2>例(４ｘ４の場合の解)</h2>
+<p><span class="math inline">\(n=4^2=16\)</span>で階数<span class="math inline">\(r=12\)</span>. よって余階数<span class="math inline">\(n-r=4\)</span></p>
+<p>解ける初期配置に対して<span class="math inline">\(2^{余階数} = 16\)</span>通りの解がある。</p>
+<p><img src="sq4-2.png" width="100"></img> <span class="math inline">\(\times 1~~\)</span> <img src="sq4-3.png" width="100"></img> <span class="math inline">\(\times 1\)</span></p>
+<p><img src="sq4-1-2-4.png" width="100"></img> <span class="math inline">\(\times 2\)</span></p>
+<p><img src="sq4-1-2-3-4.png" width="100"></img> <span class="math inline">\(\times 4~~\)</span> <img src="sq4-1-3.png" width="100"></img> <span class="math inline">\(\times 4~~\)</span> <img src="sq4.png" width="100"></img> <span class="math inline">\(\times 4\)</span></p>
+</section><section class="slide level2">
+<h2>ラプラシアンの階数</h2>
+<ul>
+<li class="fragment">コンピュータを用いた計算結果：<a href="http://oeis.org/A159257"> On-Line Encyclopedia of Integer Sequences A159257</a></li>
+</ul>
+<ul>
+<li class="fragment">階数を求める良い方法は今の所発見されていない</li>
+</ul>
+</section></section>
+<section><section class="titleslide slide level1"><h1>解の形状</h1></section><section class="slide level2">
+<h2>Sutnerの定理</h2>
+<ul>
+<li class="fragment">K.Sutnerは1989年にどのような(グラフ上の）ライツアウトパズルも すべてのライトが点灯している状態を初期状態とする とき(all-one problem)、可解であることを示した。</li>
+</ul>
+</section><section class="slide level2">
+<h2><span class="math inline">\(n=60, 余階数=0\)</span></h2>
+<center>
+<img src="square60.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2><span class="math inline">\(n=80,~ 余階数=0\)</span></h2>
+<center>
+<img src="square80.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2><span class="math inline">\(n=100,~ 余階数=0\)</span></h2>
+<center>
+<img src="square100.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2><span class="math inline">\(n=120,~ 余階数=0\)</span></h2>
+<center>
+<img src="square120.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2><span class="math inline">\(n=140,~ 余階数=0\)</span></h2>
+<center>
+<img src="square140.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2><span class="math inline">\(n=151,~ 余階数=0\)</span></h2>
+<center>
+<img src="square151.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2><span class="math inline">\(n=61,~ 余階数=40\)</span></h2>
+<center>
+<img src="square61.png" width="600"></img>
+</center>
+</section></section>
+<section><section class="titleslide slide level1"><h1>正三角形タイル張り</h1></section><section class="slide level2">
+<h2>正三角形ライツアウト</h2>
+<p>一辺の長さが<span class="math inline">\(n\)</span>の正三角形を一辺の長さが <span class="math inline">\(1\)</span>の正三角形<span class="math inline">\(n^2\)</span>個で敷き詰める。</p>
+<center>
+<img src="triangle10init.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2>基本解</h2>
+<center>
+<img src="triangle10fund.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2><span class="math inline">\(n=2,~余階数=1\)</span></h2>
+<center>
+<img src="triangle2.png" width="300"></img> <img src="triangle2-1.png" width="300"></img>
+</center>
+</section><section class="slide level2">
+<h2><span class="math inline">\(n=3,~余階数=1\)</span></h2>
+<center>
+<img src="triangle3.png" width="300"></img> <img src="triangle3-1.png" width="300"></img>
+</center>
+</section><section class="slide level2">
+<h2><span class="math inline">\(n=4,~余階数=2\)</span></h2>
+<center>
+<img src="triangle4.png" width="300"></img> <img src="triangle4-1.png" width="300"></img> <img src="triangle4-2.png" width="300"></img> <img src="triangle4-3.png" width="300"></img>
+</center>
+</section><section class="slide level2">
+<h2><span class="math inline">\(n=5,~余階数=2\)</span></h2>
+<center>
+<img src="triangle5.png" width="300"></img> <img src="triangle5-1.png" width="300"></img> <img src="triangle5-2.png" width="300"></img> <img src="triangle5-3.png" width="300"></img>
+</center>
+</section><section class="slide level2">
+<h2><span class="math inline">\(n=6,~余階数=3\)</span></h2>
+<center>
+<img src="triangle6.png" width="200"></img> <img src="triangle6-1.png" width="200"></img> <img src="triangle6-2.png" width="200"></img> <img src="triangle6-3.png" width="200"></img> <img src="triangle6-4.png" width="200"></img> <img src="triangle6-5.png" width="200"></img> <img src="triangle6-6.png" width="200"></img> <img src="triangle6-7.png" width="200"></img>
+</center>
+</section><section class="slide level2">
+<h2>予想</h2>
+<p>一辺の長さ<span class="math inline">\(n\)</span>の正三角形タイル張りライツアウトについては</p>
+<ul>
+<li class="fragment">all-one problemの解は<span class="math inline">\(D_3\)</span>-不変</li>
+<li class="fragment"><span class="math display">\[余階数=\left\lfloor\frac{n}{2}\right\rfloor\]</span></li>
+</ul>
+</section><section class="slide level2">
+<h2><span class="math inline">\(n=100,~余階数=50\)</span></h2>
+<center>
+<img src="triangle100rand.png" width="600"></img>
+</center>
+</section></section>
+<section><section class="titleslide slide level1"><h1>ペンローズタイル張り</h1></section><section class="slide level2">
+<h2>ペンローズタイル張りとは</h2>
+<ul>
+<li class="fragment">準周期性</li>
+<li class="fragment">5回対称性</li>
+<li class="fragment">5次元空間からの2次元平面への射影</li>
+</ul>
+</section><section class="slide level2">
+<h2>ペンローズタイル張りの構成</h2>
+<p><span class="math display">\[\zeta = \exp(\pi{i}/5),~~~ \varphi =\frac{1+\sqrt{5}}{2}=\zeta + \zeta^{-1}\]</span></p>
+<p><span class="math inline">\((x_0,x_1,\cdots,x_4)\in {\mathbb Z}^5\)</span>で</p>
+<p><span class="math inline">\(x_0 + x_1\zeta + \cdots + x_4\zeta^{4}\in{\mathbb C}\)</span>を略記</p>
+</section><section class="slide level2">
+<h2>ペンローズタイル張りの構成2</h2>
+<p>Aタイプ三角形(頂角<span class="math inline">\(\pi/5\)</span>、等辺長<span class="math inline">\(1\)</span>)を拡大細分する。</p>
+<center>
+<img src="expsub1.png" width="800"></img>
+</center>
+</section><section class="slide level2">
+<h2>ペンローズタイル張りの構成3</h2>
+<p>Bタイプ三角形(頂角<span class="math inline">\(3\pi/5\)</span>、等辺長<span class="math inline">\(1\)</span>)を拡大細分する。</p>
+<center>
+<img src="expsub2.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2>ペンローズタイル張りの構成4</h2>
+<div id="penroseexp">
+
+</div>
+<script src="penroseexp.js"></script>
+</section><section class="slide level2">
+<h2>是非遊んで下さい。</h2>
+<p>https://pro4-12b05.firebaseapp.com/</p>
+</section></section>
+<section><section class="titleslide slide level1"><h1>all-one problemの解のかたち</h1></section><section class="slide level2">
+<h2>拡大回数1 corank=0</h2>
+<center>
+<img src="penrose1.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2>拡大回数2 corank=1</h2>
+<center>
+<img src="penrose2.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2>拡大回数3 corank=0</h2>
+<center>
+<img src="penrose3.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2>拡大回数4 corank=12</h2>
+<center>
+<img src="penrose4.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2>拡大回数5 corank=10</h2>
+<center>
+<img src="penrose5.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2>拡大回数6 corank=2</h2>
+<center>
+<img src="penrose6.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2>拡大回数7 corank=0</h2>
+<center>
+<img src="penrose7.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2>拡大回数8 corank=6</h2>
+<center>
+<img src="penrose8.png" width="600"></img>
+</center>
+</section><section class="slide level2">
+<h2>拡大回数9 corank=6</h2>
+<center>
+<img src="penrose9.png" width="600"></img>
+</center>
+</section></section>
+<section><section class="titleslide slide level1"><h1>まとめ</h1></section><section class="slide level2">
+<h2>疑問</h2>
+<ul>
+<li class="fragment">正三角形ライツアウトの解はなぜ<span class="math inline">\(D_3\)</span>-不変なのか？</li>
+</ul>
+<ul>
+<li class="fragment">ペンローズライツアウトの解の中心付近の正五角形状の塊は拡大し続ける？　 どれぐらいの勢いで？</li>
+</ul>
+</section></section>
+<section><section class="titleslide slide level1"><h1>ありがとうございました</h1></section><section class="slide level2">
+<h2></h2>
+<center>
+<image src="anim.gif"></image>
+</center>
+</section><section class="slide level2">
+<h2>調和関数</h2>
+<p><span class="math display">\[
+{\rm Ker }L = \left\{{\bf x}\in {\mathbb F}_2^{n^2}\,\middle|\,L{\bf x} = {\bf 0}\right\}
+\]</span></p>
+<center>
+<img src="harm1.png" width="180"></img> <img src="harm2.png" width="180"></img> <img src="harm3.png" width="180"></img> <img src="harm4.png" width="180"></img> <img src="harm5.png" width="180"></img> <img src="harm6.png" width="180"></img> <img src="harm7.png" width="180"></img> <img src="harm8.png" width="180"></img> <img src="harm9.png" width="180"></img> <img src="harm10.png" width="180"></img>
+</center>
+</section></section>
+    </div>
+  </div>
+
+  <script src="opencampus20_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="opencampus20_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'opencampus20_files/reveal.js-3.3.0.1/plugin/notes/notes.js', async: true },
+          { src: 'opencampus20_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
