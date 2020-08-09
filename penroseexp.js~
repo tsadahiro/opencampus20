@@ -1,4 +1,0 @@
-penroseExp = new Vue({
-    el: '#penroseexp',
-    template: '<penroseexp n="3"></penroseexp>'
-})
